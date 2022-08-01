@@ -1,7 +1,8 @@
 #### Challenge 1 ####
 
-# load dplyr library
+# import libraries
 library(dplyr)
+library(tidyverse)
 
 # upload csv file
 mechaCar_table <- read.csv(file='MechaCar_mpg.csv',check.names = F,stringsAsFactors = F)
@@ -23,3 +24,17 @@ total_summary <- suspension_coil_table %>% summarize(Mean=mean(PSI),Median=media
 
 # get lot summary
 lot_summary <- suspension_coil_table %>% group_by(Manufacturing_Lot) %>% summarize(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI),.groups = 'keep')
+
+#### Challenge 3 ####
+
+# perform t-test across all manufacturing lots
+t.test(suspension_coil_table$PSI,mu = 1500)
+
+# perform t-test on Lot 1
+t.test(subset(suspension_coil_table,Manufacturing_Lot=="Lot1")$PSI,mu = 1500)
+
+# perform t-test on Lot 2
+t.test(subset(suspension_coil_table,Manufacturing_Lot=="Lot2")$PSI,mu = 1500)
+
+# perform t-test on Lot 3
+t.test(subset(suspension_coil_table,Manufacturing_Lot=="Lot3")$PSI,mu = 1500)
